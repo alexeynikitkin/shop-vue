@@ -21,11 +21,48 @@ export default {
       this.products = this.products.filter( product =>{
         return product.id !== id;
       })
-      this.updateCart();
+      this.updateWishlist();
       $('.wish-icon span').text(this.products.length)
     },
-    updateCart(){
+    updateWishlist(){
       localStorage.setItem('wishlist', JSON.stringify(this.products))
+    },
+    addToCart(product, isSingle) {
+      if(isSingle) {
+        $('.qtyValue').val(1);
+      }
+      let cart = localStorage.getItem('cart');
+      let qty = $('.qtyValue').val() ? $('.qtyValue').val() : 1;
+      $('.qtyValue').val(1);
+      let newProduct = [
+        {
+          'id' : product.id,
+          'image_url' : product.image_url,
+          'title' : product.title,
+          'price' : product.price,
+          'qty': qty,
+          'size': product.size,
+          'color' : product.color,
+          'stock' : product.stock
+        }
+      ];
+      if(!cart) {
+        localStorage.setItem('cart', JSON.stringify(newProduct));
+        $('.cart-icon span').text(newProduct.length)
+      } else {
+        cart = JSON.parse(cart);
+
+        cart.forEach(productInCart => {
+          if(productInCart.id === product.id) {
+            productInCart.qty = Number(productInCart.qty) + Number(qty);
+            newProduct = null;
+          }
+        })
+        Array.prototype.push.apply(cart, newProduct);
+        localStorage.setItem('cart', JSON.stringify(cart));
+      }
+      $('.cart-icon span').text(cart.length)
+      window.location.reload()
     },
   }
 }
@@ -35,7 +72,7 @@ export default {
   <div>
     <main class="overflow-hidden">
       <!--Start Breadcrumb Style2-->
-      <section class="breadcrumb-area" style="background-image: url(http://localhost:5173/src/assets/images/inner-pages/breadcum-bg.png);">
+      <section class="breadcrumb-area" style="background-image: url(src/assets/images/inner-pages/breadcum-bg.png);">
         <div class="container">
           <div class="row">
             <div class="col-xl-12">
@@ -85,11 +122,11 @@ export default {
                         <p class="price">${{ product.price }}</p>
                       </td>
                       <td>
-                        <p class="instock" v-if="product.count > 0">In Stock</p>
+                        <p class="instock" v-if="product.stock > 0">In Stock</p>
                         <p class="instock" v-else>Out Of Stock</p>
                       </td>
                       <td class="add-to-cart-btn">
-                        <a v-if="product.count > 0" href="cart.html" class=" btn--primary style2 ">Add To Cart</a>
+                        <a v-if="product.stock > 0" href="" @click.prevent="addToCart(product)" class=" btn--primary style2 ">Add To Cart</a>
                         <p v-else class="instock">Waiting for it...</p>
                       </td>
                       <td>

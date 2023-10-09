@@ -17,7 +17,8 @@ export default {
       tags: [],
       prices: [],
       pagination: [],
-      attrs: []
+      attrs: [],
+      value: 1
     }
   },
   methods: {
@@ -32,6 +33,7 @@ export default {
       .then(res => {
         this.products = res.data.data
         this.pagination = res.data.meta
+        $(document).trigger('changed')
         console.log('Products',this.products)
       })
       .finally(v => {
@@ -89,11 +91,11 @@ export default {
           })
     },
     filterProducts() {
+      $(document).trigger('changed')
       let prices = $('#priceRange').val();
       prices = prices.replace(/[\s+]|[$]/g, '').split('-');
       this.prices = prices
       this.getProducts()
-      $(document).trigger('changed')
     },
 
     addColor(colors){
@@ -130,7 +132,8 @@ export default {
           'price' : product.price,
           'qty': qty,
           'size': product.size,
-          'color' : product.color
+          'color' : product.color,
+          'stock' : product.stock
         }
       ];
       if(!cart) {
@@ -146,11 +149,7 @@ export default {
           }
         })
         Array.prototype.push.apply(cart, newProduct);
-
-
         localStorage.setItem('cart', JSON.stringify(cart));
-
-
       }
       $('.cart-icon span').text(cart.length)
       window.location.reload()
@@ -435,16 +434,7 @@ export default {
                                           <a
                                               @click.prevent="getProduct(variation.id)"
                                              :style="`background: ${variation.color};`" :href="`#popup${variation.id}`" class="color-name">
-                                            <span>{{ variation.color }}</span>
-                                          </a>
-                                        </template>
-                                      </div>
-                                      <div class="color-varient">
-                                        <template v-for="variation in popupProduct.group">
-                                          <a
-                                              @click.prevent="changePrice(popupProduct.price, variation.price)"
-                                              :style="`background: ${variation.size};`" :data-price="variation.size" class="color-name">
-                                            <span>{{ variation.size }}</span>
+                                            <span>color:{{ variation.color }}, size: {{ variation.size }}</span>
                                           </a>
                                         </template>
                                       </div>
@@ -452,31 +442,16 @@ export default {
                                         <h6 v-if="popupProduct.stock > 0">Qty: {{ popupProduct.stock }}<br> In cart {{getProductFromCart(popupProduct.id)}}</h6>
                                         <div class="button-group" v-if="popupProduct.stock != getProductFromCart(popupProduct.id)">
                                           <div class="qtySelector text-center" :data-stock="popupProduct.stock" :data-cart-qty="getProductFromCart(popupProduct.id)">
-                                                                                    <span class="decreaseQty"><i
-                                                                                        class="flaticon-minus"></i>
-                                                                                    </span> <input type="number"
-                                                                                                   class="qtyValue"
-                                                                                                   value="1"/>
-                                            <span class="increaseQty"> <i
-                                                class="flaticon-plus"></i>
-                                                                                    </span></div>
+                                            <span class="decreaseQty"><i class="flaticon-minus"></i></span>
+                                            <input type="number" class="qtyValue" :value="value"/>
+                                            <span class="increaseQty"> <i class="flaticon-plus"></i></span>
+                                          </div>
                                           <button v-if="popupProduct.stock != getProductFromCart(popupProduct.id)" class="btn--primary" @click.prevent="addToCart(popupProduct)"> Add to Cart </button>
                                         </div>
                                         <div class="button-group" v-else>
                                           <p class="btn--primary"> Out of Stock </p>
                                         </div>
                                       </div>
-<!--                                      <div class="payment-method"><a href="#0"> <img-->
-<!--                                          src="src/assets/images/payment_method/method_1.png"-->
-<!--                                          alt=""> </a>-->
-<!--                                        <a href="#0"> <img-->
-<!--                                            src="src/assets/images/payment_method/method_2.png"-->
-<!--                                            alt=""> </a> <a href="#0"> <img-->
-<!--                                            src="src/assets/images/payment_method/method_3.png"-->
-<!--                                            alt=""> </a>-->
-<!--                                        <a href="#0"> <img-->
-<!--                                            src="src/assets/images/payment_method/method_4.png"-->
-<!--                                            alt=""> </a></div>-->
                                     </div>
                                   </div>
                                 </div>

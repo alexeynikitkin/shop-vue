@@ -55,6 +55,7 @@ export default {
           <div class="row wow fadeInUp animated">
             <!--Start My Account Page Menu-->
             <div class="col-xl-3 col-lg-4">
+
               <div class="d-flex align-items-start">
                 <div class="nav my-account-page__menu flex-column nav-pills me-3" id="v-pills-tab"
                      role="tablist" aria-orientation="vertical"> <button class="nav-link active"
@@ -89,9 +90,16 @@ export default {
                     <h4><span>Hello {{ user.name }}</span> (Not Admin? Logout)</h4>
                     <ul>
                       <li v-for="order in user.orders">
-                        <div class="item" v-for="item in JSON.parse(order.products)">
+                        <div class="item d-flex gap-2" v-for="item in JSON.parse(order.products)">
                           <img width="100" height="100" :src="item.image_url" :alt="item.title">
-                          <h4>{{ item.title }}</h4>
+                          <div class="details">
+                            <h4>#: {{ order.id }}</h4>
+                            <p>Title: <router-link :to="{name: 'products.show', params: {id: item.id}}">{{ item.title }}</router-link></p>
+                            <p>Price: ${{ item.price }}</p>
+                            <p>Qty: {{ item.qty }}</p>
+                            <p>Size: {{ item.size }}</p>
+                            <p>Color: {{ item.color }}</p>
+                          </div>
                         </div>
                         <hr>
                       </li>
@@ -109,7 +117,9 @@ export default {
                      aria-labelledby="v-pills-account-tab">
                   <div class="tabs-content__single">
                     <h4><span>Hello {{ user.name }}</span> (Not Admin? Logout)</h4>
-                    <h5> {{user}} </h5>
+                    <h5>Name: {{user.name}} </h5>
+                    <p>Email: {{user.email}} </p>
+                    <p>Address: {{user.address}} </p>
                   </div>
                 </div>
               </div>

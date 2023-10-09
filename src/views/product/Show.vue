@@ -89,7 +89,7 @@ export default {
                 <div class="big-product single-product-one slider-for" v-if="product && product.product_images.length == 0">
                   <div>
                     <div class="single-item"> <img :src="product.image_url" :alt="product.title">
-                      <div class="ptag"> <span class="one">-20% </span> </div>
+                      <div class="ptag" v-for="tag in product.tags"> <span class="one">{{ tag.title }}</span> </div>
                     </div>
                   </div>
                 </div>

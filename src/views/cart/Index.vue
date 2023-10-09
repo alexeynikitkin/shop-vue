@@ -7,7 +7,7 @@ export default {
     this.getLoggedInUser()
     this.discounts = this.user.discounts
     console.log(this.user)
-    console.log(this.discounts)
+    console.log('Discounts', this.discounts)
   },
   data() {
     return {
@@ -34,12 +34,17 @@ export default {
       this.products = JSON.parse(localStorage.getItem('cart'));
     },
     minusQty(product){
-      if(product.qty == 0) return
-      product.qty--;
+      if(product.qty > 1) {
+        product.qty--;
+      }
       this.updateCart();
     },
     plusQty(product){
-      product.qty++;
+      let stock = product.stock;
+      let cartQty = product.qty;
+      if(stock > cartQty) {
+        product.qty++;
+      }
       this.updateCart();
     },
     removeProduct(id) {
@@ -61,7 +66,6 @@ export default {
         'total_price': this.totalPrice,
         'total_disc' : this.totalDisc
       }).then(res => {
-        console.log(res);
         this.products = []
         localStorage.setItem('cart', '[]');
         window.location.reload()
@@ -79,7 +83,6 @@ export default {
         'total_price': this.totalPrice,
         'total_disc' : this.totalDisc
       }).then(res => {
-        console.log(res);
         this.products = []
         localStorage.setItem('cart', '[]');
         window.location.reload()
@@ -92,12 +95,16 @@ export default {
       this.user = JSON.parse(localStorage.getItem('user_logged'));
     },
     applyCoupon() {
-      $('.cart-total-box .price').text(this.totalPrice - this.discounts[0].value);
+      $('.cart-total-box .price, .cart-check-out-list .price-sub').text(this.totalPrice - this.discounts[0].value);
+      $('.cart-check-out-list .price').text(this.totalPrice - this.discounts[0].value + 50);
       this.totalDisc = this.totalPrice - this.discounts[0].value;
       this.axios.post('http://127.0.0.1:8000/api/discount', {
         'discount_id': this.discounts[0].id,
       }).then(res => {
         console.log(res);
+        $('.coupon-button').text('Applied');
+        $('.coupon-button').css('pointer-events', 'none');
+        $('.coupon-times').text($('.coupon-times').attr('data-value') - 1);
       }).finally(v => {
         $(document).trigger('changed');
       })
@@ -198,12 +205,12 @@ export default {
           <div class="row">
             <div class="col-xl-12" v-if="products.length > 0">
               <div class="cart-button-box">
-                <div class="apply-coupon wow fadeInUp animated">
+                <div class="apply-coupon wow fadeInUp animated" v-if="discounts.length > 0">
                   <div class="apply-coupon-input-box mt-30 ">
-                    <input type="text" name="coupon-code" placeholder="Coupon Code">
+                    <p>U have coupon for <span class="coupon-times" :data-value="discounts[0].times">{{discounts[0].times}}</span> times with discount ${{discounts[0].value}}</p>
                   </div>
                   <div class="apply-coupon-button mt-30">
-                    <button @click.prevent="applyCoupon()" class="btn--primary style2" type="submit">Apply Coupon</button>
+                    <button @click.prevent="applyCoupon()" class="btn--primary style2 coupon-button" type="submit">Apply Coupon</button>
                   </div>
                 </div>
                 <div class="cart-button-box-right wow fadeInUp animated"> <router-link :to="{name: 'products.index'}" class="btn--primary mt-30"
@@ -247,32 +254,6 @@ export default {
                       <th>$<span class="price">{{ totalPrice }}</span></th>
                     </tr>
                     </thead>
-<!--                    <tbody>-->
-<!--                    <tr>-->
-<!--                      <td class="shipping"> Shipping </td>-->
-<!--                      <td class="selact-box1">-->
-<!--                        <ul class="shop-select-option-box-1">-->
-<!--                          <li> <input type="checkbox" name="free_shipping" id="option_1"-->
-<!--                                      checked=""> <label for="option_1"><span></span>Free-->
-<!--                            Shipping</label> </li>-->
-<!--                          <li> <input type="checkbox" name="flat_rate" id="option_2"> <label-->
-<!--                              for="option_2"><span></span>Flat Rate</label> </li>-->
-<!--                          <li> <input type="checkbox" name="local_pickup" id="option_3">-->
-<!--                            <label for="option_3"><span></span>Local Pickup</label> </li>-->
-<!--                        </ul>-->
-<!--                        <div class="inner-text">-->
-<!--                          <p>Shipping options will be updated during checkout</p>-->
-<!--                        </div>-->
-<!--                        <h4>Calculate Shipping</h4>-->
-<!--                      </td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                      <td>-->
-<!--                        <h4 class="total">Total</h4>-->
-<!--                      </td>-->
-<!--                      <td class="subtotal">$2500.00</td>-->
-<!--                    </tr>-->
-<!--                    </tbody>-->
                   </table>
                 </div>
               </div>
@@ -286,7 +267,7 @@ export default {
                       <p>Subtotal</p>
                     </div>
                     <div class="right">
-                      <p>${{ totalPrice }}</p>
+                      <p>$<span class="price-sub">{{ totalPrice }}</span></p>
                     </div>
                   </li>
                   <li>
@@ -302,7 +283,7 @@ export default {
                       <p>Total Price:</p>
                     </div>
                     <div class="right">
-                      <p>${{ totalPrice + 50 }}</p>
+                      <p>$<span class="price">{{ totalPrice + 50 }}</span></p>
                     </div>
                   </li>
                 </ul>

@@ -8,11 +8,28 @@ export default {
   data() {
     return {
       // products: [],
-      // name: '',
-      // address: '',
-      // email: '',
+      name: '',
+      email: '',
+      address: '',
+      password: '',
     }
   },
+  methods: {
+    registerUser(){
+      this.axios.post('http://127.0.0.1:8000/api/register-user', {
+        'name': this.name,
+        'email': this.email,
+        'address': this.address,
+        'password': this.password,
+      }).then(res => {
+        console.log(res);
+        window.location.replace('/login');
+
+      }).finally(v => {
+        $(document).trigger('changed');
+      })
+    },
+  }
 }
 </script>
 
@@ -52,17 +69,17 @@ export default {
                 </div>
                 <form class="common-form">
                   <div class="form-group"> <input type="text" class="form-control"
-                                                  placeholder="Your Name"> </div>
-                  <div class="form-group"> <input type="text" class="form-control" placeholder="Username">
+                                                  placeholder="Your Name" v-model="name"> </div>
+                  <div class="form-group"> <input type="text" class="form-control" placeholder="Address" v-model="address">
                   </div>
-                  <div class="form-group"> <input type="email" class="form-control"
+                  <div class="form-group"> <input type="email" class="form-control" v-model="email"
                                                   placeholder="Your Email"> </div>
                   <div class="form-group eye">
-                    <div class="icon icon-1"> <i class="flaticon-hidden"></i></div> <input
+                    <div class="icon icon-1"> <i class="flaticon-hidden"></i></div> <input v-model="password"
                       type="password" id="password-field" class="form-control" placeholder="Password">
                     <div class="icon icon-2 "><i class="flaticon-visibility"></i> </div>
                   </div>
-                  <button type="submit" class="btn--primary style2">Register </button>
+                  <button @click.prevent="registerUser()" type="submit" class="btn--primary style2">Register </button>
                 </form>
               </div>
             </div>

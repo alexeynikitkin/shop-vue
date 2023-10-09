@@ -883,39 +883,41 @@ jQuery(function ($) {
       $('.qtySelector').find('.qtyValue').val(0);
     }
     /****======  Increase and decrease number by click  ======*******/
-    if ($(".increaseQty").length) {
-      let stock = $('.qtySelector').attr('data-stock');
-      let cartQty = $('.qtySelector').attr('data-cart-qty');
-      var minVal = 1;
-      var maxVal = stock - cartQty;
-      $(".increaseQty").on("click", function () {
-        var $parentElm = $(this).parents(".qtySelector");
-        $(this).addClass("clicked");
-        setTimeout(function () {
-          $(".clicked").removeClass("clicked");
-        }, 100);
-        var value = $parentElm.find(".qtyValue").val();
-        if (value < maxVal) {
-          value++;
-        }
-        $parentElm.find(".qtyValue").val(value);
-      });
-    };
+    console.log($(".qtySelector .increaseQty"));
+    $(".qtySelector").each(function() {
+        $(this).find(".increaseQty").on("click", function () {
+          console.log('clicked++')
+          let stock = $(this).closest('.qtySelector').attr('data-stock');
+          let cartQty = $(this).closest('.qtySelector').attr('data-cart-qty');
+          var $parentElm = $(this).closest(".qtySelector");
+          var minVal = 1;
+          var maxVal = stock - cartQty;
+          $(this).addClass("clicked");
+          setTimeout(function () {
+            $(".clicked").removeClass("clicked");
+          }, 100);
+          var value = $parentElm.find(".qtyValue").val();
+          if (value < maxVal) {
+            value = parseInt(value) + 1;
+          }
+          $parentElm.find(".qtyValue").val(value);
+        });
 
-    if ($(".decreaseQty").length) {
-      $(".decreaseQty").on("click", function () {
-        var $parentElm = $(this).parents(".qtySelector");
-        $(this).addClass("clicked");
-        setTimeout(function () {
-          $(".clicked").removeClass("clicked");
-        }, 100);
-        var value = $parentElm.find(".qtyValue").val();
-        if (value > 1) {
-          value--;
-        }
-        $parentElm.find(".qtyValue").val(value);
-      });
-    };
+        $(this).find(".decreaseQty").on("click", function () {
+          console.log('clicked--')
+          var $parentElm = $(this).closest(".qtySelector");
+          $(this).addClass("clicked");
+          setTimeout(function () {
+            $(".clicked").removeClass("clicked");
+          }, 100);
+          var value = $parentElm.find(".qtyValue").val();
+          if (value > 1) {
+            value = parseInt(value) - 1;
+          }
+          $parentElm.find(".qtyValue").val(value);
+        });
+    })
+
 
 
     /****====== banner-one TweenMax Js  ======*******/
