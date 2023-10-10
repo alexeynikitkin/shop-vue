@@ -190,12 +190,12 @@ export default {
                             <li class="d-lg-block d-none">
                               <router-link :to="{name: 'wishlist.index'}" class="number">
                                 <i class="flaticon-heart"></i>
-                                <span class="count">{{ productsWish }}</span>
+                                <span class="count">{{ (productsWish == []) ? 0 : productsWish  }}</span>
                               </router-link>
                             </li>
                             <li class="cartm"><a href="#0" class="number cart-icon"> <i
                                 class="flaticon-shopping-cart"></i><span
-                                class="count">{{ productsCart }}</span> </a></li>
+                                class="count">{{ (productsCart == []) ? 0 : productsCart }}</span> </a></li>
                           </ul>
                         </div>
                       </div>
