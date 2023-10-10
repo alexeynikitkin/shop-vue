@@ -5,10 +5,10 @@ export default {
   mounted(){
     $(document).trigger('changed');
     if(localStorage.getItem('cart')) {
-      this.productsCart = JSON.parse(localStorage.getItem('cart')).length
+      this.productsCart = Object.keys(JSON.parse(localStorage.getItem('cart'))).length
     }
     if(localStorage.getItem('wishlist')) {
-      this.productsWish = JSON.parse(localStorage.getItem('wishlist')).length
+      this.productsWish = Object.keys(JSON.parse(localStorage.getItem('wishlist'))).length
     }
     this.getProductsCart()
     console.log(Object.keys(JSON.parse(localStorage.getItem('user_logged'))).length > 0)
