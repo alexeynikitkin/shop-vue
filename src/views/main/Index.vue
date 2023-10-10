@@ -58,7 +58,7 @@ export default {
           <div class="slide">
             <div class="contant-box position-relative">
 
-              <img class="bg-img hundread-vh" src="src/assets/images/home-three/home-3-bg.jpg" alt="image">
+              <img class="bg-img hundread-vh" src="http://localhost:5173/src/assets/images/home-three/home-3-bg.jpg" alt="image">
 
               <div class="content-holder p-0 absolute-content">
                 <div class="container  w-100 h-100">
@@ -88,7 +88,7 @@ export default {
             <div class="contant-box position-relative">
 
 
-              <img class="bg-img hundread-vh" src="src/assets/images/home-three/home-3-bg-2.jpg" alt="image">
+              <img class="bg-img hundread-vh" src="http://localhost:5173/src/assets/images/home-three/home-3-bg-2.jpg" alt="image">
 
 
               <div class="content-holder p-0 absolute-content">
@@ -126,7 +126,7 @@ export default {
             <div class="col-xl-6 wow fadeInLeft animated ">
               <div class="video-main-box position-relative">
                 <div class="video-two__img"
-                     style="background-image: url(src/assets/images/home-three/video-v2-img1.jpg);">
+                     style="background-image: url(http://localhost:5173/src/assets/images/home-three/video-v2-img1.jpg);">
                   <div class="icon wow zoomIn animated animated" data-wow-delay="300ms"
                        data-wow-duration="1500ms"
                        style="visibility: visible; animation-duration: 1500ms; animation-delay: 300ms; animation-name: zoomIn;">
@@ -182,7 +182,7 @@ export default {
                     <div class="col-lg-4 col-sm-6" v-for="cat in attrs">
                       <div class="categories-three__list-item mt-30 wow fadeInUp animated">
                         <div class="categories-three__list-item-inner"><router-link :to="{name: 'categories.show', params: {id: cat.id}}" href="shop-grid-right-sidebar.html" class="img-box"> <img
-                            src="src/assets/images/home-three/categories-v2-img1.jpg" alt=""/>
+                            src="http://localhost:5173/src/assets/images/home-three/categories-v2-img1.jpg" alt=""/>
                         </router-link>
                           <div class="title text-center">
                             <h4><router-link :to="{name: 'categories.show', params: {id: cat.id}}">{{ cat.title }}</router-link></h4>
@@ -205,7 +205,7 @@ export default {
           <div class="row mt--30">
             <div class="col-xxl-3 col-md-6 mt-30 wow fadeInUp animated " data-wow-delay="0.2s">
               <div class="core-features__box d-flex ms-0"><span class="one"></span> <span class="two"></span>
-                <div class="icon"><img src="src/assets/images/icon/f-icon-1.png" alt=""></div>
+                <div class="icon"><img src="http://localhost:5173/src/assets/images/icon/f-icon-1.png" alt=""></div>
                 <div class="core-features__box-content"><a href="login.html" class="d-block">
                   <h4> Secure Payment </h4>
                 </a>
@@ -215,7 +215,7 @@ export default {
             </div>
             <div class="col-xxl-3 col-md-6 mt-30 wow fadeInUp animated " data-wow-delay="0.3s">
               <div class="core-features__box d-flex "><span class="one"></span> <span class="two"></span>
-                <div class="icon"><img src="src/assets/images/icon/f-icon-2.png" alt=""></div>
+                <div class="icon"><img src="http://localhost:5173/src/assets/images/icon/f-icon-2.png" alt=""></div>
                 <div class="core-features__box-content"><a href="login.html" class="d-block">
                   <h4> 27/7 Fast Delivery </h4>
                 </a>
@@ -225,7 +225,7 @@ export default {
             </div>
             <div class="col-xxl-3 col-md-6 mt-30 wow fadeInUp animated " data-wow-delay="0.4s">
               <div class="core-features__box d-flex "><span class="one"></span> <span class="two"></span>
-                <div class="icon"><img src="src/assets/images/icon/f-icon-3.png" alt=""></div>
+                <div class="icon"><img src="http://localhost:5173/src/assets/images/icon/f-icon-3.png" alt=""></div>
                 <div class="core-features__box-content"><a href="login.html" class="d-block">
                   <h4> Return & Refund </h4>
                 </a>
@@ -235,7 +235,7 @@ export default {
             </div>
             <div class="col-xxl-3 col-md-6 mt-30 wow fadeInUp animated " data-wow-delay="0.5s">
               <div class="core-features__box d-flex me-0"><span class="one"></span> <span class="two"></span>
-                <div class="icon"><img src="src/assets/images/icon/f-icon-4.png" alt=""></div>
+                <div class="icon"><img src="http://localhost:5173/src/assets/images/icon/f-icon-4.png" alt=""></div>
                 <div class="core-features__box-content"><a href="login.html" class="d-block">
                   <h4> Quality Support </h4>
                 </a>
@@ -265,7 +265,7 @@ export default {
                 <div class="review-one__single-review" v-for="comment in comments">
                   <div class="review-one__single-content">
                     <div class="review-one__aurthor">
-                      <div class="thumb"><img src="src/assets/images/testimonial/testimonial-v1-1.png"
+                      <div class="thumb"><img src="http://localhost:5173/src/assets/images/testimonial/testimonial-v1-1.png"
                                               alt=""></div>
                       <span class="quate"> <i
                           class="flaticon-right-quotes-symbol"></i> </span>
