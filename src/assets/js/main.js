@@ -834,7 +834,7 @@ jQuery(function ($) {
 
 
     /****======  Wow  ======*******/
-    new WOW().init();
+    // new WOW().init();
 
 
     /****====== Magnific popup_link  ======*******/

@@ -4,11 +4,15 @@ export default {
   name: "App",
   mounted(){
     $(document).trigger('changed');
-    if(localStorage.getItem('cart')) {
+    if(localStorage.getItem('cart') != null) {
       this.productsCart = Object.keys(JSON.parse(localStorage.getItem('cart'))).length
+    } else {
+      this.productsCart = 0;
     }
-    if(localStorage.getItem('wishlist')) {
+    if(localStorage.getItem('wishlist') != null) {
       this.productsWish = Object.keys(JSON.parse(localStorage.getItem('wishlist'))).length
+    } else {
+      this.productsWish = 0;
     }
     this.getProductsCart()
     if(localStorage.getItem("user_logged") != null) {
@@ -26,13 +30,15 @@ export default {
           total += product.price * product.qty;
         })
       }
-
       return total
     }
   },
   methods: {
     getProductsCart() {
-      this.products = JSON.parse(localStorage.getItem('cart'));
+      if(localStorage.getItem('cart') != null) {
+        this.products = JSON.parse(localStorage.getItem('cart'));
+      }
+
     },
     removeProduct(id) {
       this.products = this.products.filter( product =>{

@@ -193,14 +193,18 @@ export default {
       return ifInclude;
     },
     getProductFromCart(id){
-      let cart = JSON.parse(localStorage.getItem('cart'));
-      // let thisProdId = this.$route.params.id;
-      var item = cart.filter(item => item.id == id);
-      if(Object.keys(item).length > 0) {
-        return item[0].qty;
-      } else {
-        return 0;
+      if(localStorage.getItem('cart') != null) {
+        let cart = JSON.parse(localStorage.getItem('cart'));
+        // let thisProdId = this.$route.params.id;
+
+        var item = cart.filter(item => item.id == id);
+        if(Object.keys(item).length > 0) {
+          return item[0].qty;
+        } else {
+          return 0;
+        }
       }
+
     }
 
   }

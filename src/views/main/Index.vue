@@ -118,46 +118,7 @@ export default {
       </section>
       <!-- End Main Slider -->
 
-      <!--Start Video Two-->
-      <section class="video-two mt-60 mb-60 overflow-hidden">
-        <div class="auto-container container ">
-          <div class="row g-0">
-            <!--Start Video Two Img-->
-            <div class="col-xl-6 wow fadeInLeft animated ">
-              <div class="video-main-box position-relative">
-                <div class="video-two__img">
-                  <div class="icon wow zoomIn animated animated" data-wow-delay="300ms"
-                       data-wow-duration="1500ms"
-                       style="visibility: visible; animation-duration: 1500ms; animation-delay: 300ms; animation-name: zoomIn;">
-                    <a class="video-popup" title="Video Gallery" href=""> <i class="flaticon-play"></i>
-                    </a></div>
-                </div>
-              </div>
-            </div>
-            <!--End Video Two Img-->
-            <!--Start Video Two Content-->
-            <div class="col-xl-6 ">
-              <div class="video-two__content">
-                <div class="video-two__content-inner">
-                  <div class="tagline wow fadeInUp animated"> <span>Hurry up, the deal will end
-                                        soon</span></div>
-                  <h2 class=" wow fadeInUp animated">Best Deal Today</h2>
-                  <div class="text wow fadeInUp animated">
-                    <p>Credibly fabricate out of-the-boxn twice relationshi after empowered alignments.
-                      Completely band productivate client-based sources before enabled best practices.
-                      Dramatically network maout-of-the-box best practices whereas effective
-                      intellectual capital.</p>
-                  </div>
-                  <div class="btn-box wow fadeInUp animated"><a href="shop-grid.html"
-                                                                class="btn--primary style2">Discover More</a></div>
-                </div>
-              </div>
-            </div>
-            <!--End Video Two Content-->
-          </div>
-        </div>
-      </section>
-      <!--End Video Two-->
+
 
 
       <!--Start Categories Two-->
