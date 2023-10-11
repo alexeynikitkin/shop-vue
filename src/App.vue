@@ -11,11 +11,11 @@ export default {
       this.productsWish = Object.keys(JSON.parse(localStorage.getItem('wishlist'))).length
     }
     this.getProductsCart()
-    if(localStorage.getItem("user_logged") !== null) {
-      if(Object.keys(JSON.parse(localStorage.getItem('user_logged'))).length > 0) {
-        this.getUserFromBack()
-      }
-    }
+    // if(localStorage.getItem("user_logged") !== null) {
+    //   if(Object.keys(JSON.parse(localStorage.getItem('user_logged'))).length > 0) {
+    //     this.getUserFromBack()
+    //   }
+    // }
 
 
     this.user = this.getUser()
@@ -23,9 +23,9 @@ export default {
   computed: {
     totalPrice() {
       let total = 0;
-      this.products.forEach(product => {
-        total += product.price * product.qty;
-      })
+      // this.products.forEach(product => {
+      //   total += product.price * product.qty;
+      // })
       return total
     }
   },
