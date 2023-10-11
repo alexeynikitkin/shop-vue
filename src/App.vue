@@ -11,7 +11,6 @@ export default {
       this.productsWish = Object.keys(JSON.parse(localStorage.getItem('wishlist'))).length
     }
     this.getProductsCart()
-    console.log(Object.keys(JSON.parse(localStorage.getItem('user_logged'))).length > 0)
     if(Object.keys(JSON.parse(localStorage.getItem('user_logged'))).length > 0) {
       this.getUserFromBack()
     }
