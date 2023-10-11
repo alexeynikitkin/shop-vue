@@ -125,8 +125,7 @@ export default {
             <!--Start Video Two Img-->
             <div class="col-xl-6 wow fadeInLeft animated ">
               <div class="video-main-box position-relative">
-                <div class="video-two__img"
-                     style="background-image: url(/src/assets/images/home-three/video-v2-img1.jpg);">
+                <div class="video-two__img">
                   <div class="icon wow zoomIn animated animated" data-wow-delay="300ms"
                        data-wow-duration="1500ms"
                        style="visibility: visible; animation-duration: 1500ms; animation-delay: 300ms; animation-name: zoomIn;">
