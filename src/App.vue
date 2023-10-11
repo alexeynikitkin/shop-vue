@@ -11,9 +11,12 @@ export default {
       this.productsWish = Object.keys(JSON.parse(localStorage.getItem('wishlist'))).length
     }
     this.getProductsCart()
-    if(Object.keys(JSON.parse(localStorage.getItem('user_logged'))).length > 0) {
-      this.getUserFromBack()
+    if(localStorage.getItem("user_logged") !== null) {
+      if(Object.keys(JSON.parse(localStorage.getItem('user_logged'))).length > 0) {
+        this.getUserFromBack()
+      }
     }
+
 
     this.user = this.getUser()
   },
