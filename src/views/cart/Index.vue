@@ -23,9 +23,11 @@ export default {
   computed: {
     totalPrice() {
       let total = 0;
-      // this.products.forEach(product => {
-      //   total += product.price * product.qty;
-      // })
+      if(localStorage.getItem('cart') != null) {
+        this.products.forEach(product => {
+          total += product.price * product.qty;
+        })
+      }
       return total
     }
   },
