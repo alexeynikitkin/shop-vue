@@ -11,7 +11,8 @@ export default {
       this.productsWish = Object.keys(JSON.parse(localStorage.getItem('wishlist'))).length
     }
     this.getProductsCart()
-    if(JSON.parse(localStorage.getItem('user_logged')).length > 0) {
+    console.log(Object.keys(JSON.parse(localStorage.getItem('user_logged'))).length > 0)
+    if(Object.keys(JSON.parse(localStorage.getItem('user_logged'))).length > 0) {
       this.getUserFromBack()
     }
 
@@ -20,15 +21,10 @@ export default {
   computed: {
     totalPrice() {
       let total = 0;
-      if(this.products.length > 0) {
-        this.products.forEach(product => {
-          total += product.price * product.qty;
-        })
-        return total
-      } else {
-        return total
-      }
-
+      this.products.forEach(product => {
+        total += product.price * product.qty;
+      })
+      return total
     }
   },
   methods: {
