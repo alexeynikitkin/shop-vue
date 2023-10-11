@@ -100,7 +100,7 @@ export default {
                   <div class="row">
                     <div class="menu-info d-flex justify-content-between align-items-center">
                       <div class="menubar"><span></span> <span></span> <span></span></div>
-                      <router-link to="/" class="logo"> <img src="http://localhost:5173/src/assets/images/logo/logo.png"
+                      <router-link to="/" class="logo"> <img src="/src/assets/images/logo/logo.png"
                                                       alt=""> </router-link>
                       <div class="cart-holder">
                         <a href="#0" class="cart cart-icon position-relative">
@@ -136,7 +136,7 @@ export default {
           <div class="d-lg-block d-none">
             <div class="row g-0 position-relative">
               <div class="col-lg-3 d-flex align-items-center justify-content-center border-rit ">
-                <div class="logo"><a href="/"> <img src="http://localhost:5173/src/assets/images/logo/logo.png" alt=""> </a>
+                <div class="logo"><a href="/"> <img src="/src/assets/images/logo/logo.png" alt=""> </a>
                 </div>
               </div>
               <div class="col-lg-9 g-0 p-0">
@@ -218,7 +218,7 @@ export default {
                 <div class="menu-info d-flex justify-content-between align-items-center">
                   <div class="menubar"><span></span> <span></span> <span></span></div>
                   <a
-                      href="/" class="logo"> <img src="http://localhost:5173/src/assets/images/logo/logo.png" alt=""> </a>
+                      href="/" class="logo"> <img src="/src/assets/images/logo/logo.png" alt=""> </a>
                   <div class="cart-holder">
                     <a href="#0" class="cart cart-icon position-relative">
                       <i class="flaticon-shopping-cart"></i>
@@ -231,7 +231,7 @@ export default {
         </div>
         <div class="container position-relative d-lg-block d-none">
           <div class="d-flex align-items-center justify-content-between"><a href="/" class="logo me-2">
-            <img src="http://localhost:5173/src/assets/images/logo/logo.png" alt=""> </a>
+            <img src="/src/assets/images/logo/logo.png" alt=""> </a>
             <div class="mega-menu-default mega-menu d-lg-block d-none">
               <div class="container ">
                 <div class="row">
@@ -297,7 +297,7 @@ export default {
           <div class="sidebar-textwidget">
             <div class="sidebar-info-contents">
               <div class="content-inner">
-                <div class="logo"><a href="/"><img src="http://localhost:5173/src/assets/images/logo/logo-2.png" alt=""></a>
+                <div class="logo"><a href="/"><img src="/src/assets/images/logo/logo-2.png" alt=""></a>
                 </div>
                 <div class="content-box">
                   <h4>About Us</h4>
@@ -356,7 +356,7 @@ export default {
 
     <!--  Footer Three start -->
     <footer class="footer-default footer-3 ">
-      <div class="footer-default__shap_1 position-absolute "><img src="http://localhost:5173/src/assets/images/shape/footer-shape-1.png"
+      <div class="footer-default__shap_1 position-absolute "><img src="/src/assets/images/shape/footer-shape-1.png"
                                                                   alt=""></div>
       <!--Start Footer-->
       <div class="footer-default__main-footer position-relative">

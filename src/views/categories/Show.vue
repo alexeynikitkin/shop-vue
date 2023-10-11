@@ -144,7 +144,7 @@ export default {
   <div>
     <main class="overflow-hidden cat">
       <!--Start Breadcrumb Style2-->
-      <section class="breadcrumb-area" style="background-image: url(../src/assets/images/inner-pages/breadcum-bg.png);">
+      <section class="breadcrumb-area" style="background-image: url(/src/assets/images/inner-pages/breadcum-bg.png);">
         <div class="container">
           <div class="row">
             <div class="col-xl-12">
@@ -313,15 +313,15 @@ export default {
                             </div>
                           </div>
                           <div class="payment-method"><a href="#0"> <img
-                              src="src/assets/images/payment_method/method_1.png"
+                              src="/src/assets/images/payment_method/method_1.png"
                               alt=""> </a>
                             <a href="#0"> <img
-                                src="src/assets/images/payment_method/method_2.png"
+                                src="/src/assets/images/payment_method/method_2.png"
                                 alt=""> </a> <a href="#0"> <img
-                                src="src/assets/images/payment_method/method_3.png"
+                                src="/src/assets/images/payment_method/method_3.png"
                                 alt=""> </a>
                             <a href="#0"> <img
-                                src="src/assets/images/payment_method/method_4.png"
+                                src="/src/assets/images/payment_method/method_4.png"
                                 alt=""> </a></div>
                         </div>
                       </div>

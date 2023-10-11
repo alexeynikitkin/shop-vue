@@ -149,7 +149,7 @@ export default {
                     </h4>
                     <ul class="varients" v-if="product">
                       <li v-for="variant in product.group"> <a :href="`/products/${variant.id}`" class="shop-details-top-color-sky-img"
-                              data-src="http://localhost:5173/src/assets/images/shop/products-img1.jpg"> <img
+                              data-src="/src/assets/images/shop/products-img1.jpg"> <img
                           :src="variant.image_url"
                           alt=""> </a> </li>
                     </ul>

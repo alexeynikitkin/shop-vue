@@ -211,7 +211,7 @@ export default {
   <div>
     <main class="overflow-hidden ">
       <!--Start Breadcrumb Style2-->
-      <section class="breadcrumb-area" style="background-image: url(src/assets/images/inner-pages/breadcum-bg.png);">
+      <section class="breadcrumb-area" style="background-image: url(/src/assets/images/inner-pages/breadcum-bg.png);">
         <div class="container">
           <div class="row">
             <div class="col-xl-12">
@@ -239,7 +239,7 @@ export default {
                 <ul>
                   <li v-for="cat in attrs">
                     <router-link :to="{name: 'categories.show', params: {id: cat.id}}" class="img-box">
-                      <div class="inner"><img src="src/assets/images/shop/product-categories-v1-img1.png" :alt="cat.title"/></div>
+                      <div class="inner"><img src="/src/assets/images/shop/product-categories-v1-img1.png" :alt="cat.title"/></div>
                     </router-link>
                     <div class="title">
                       <router-link :to="{name: 'categories.show', params: {id: cat.id}}">
