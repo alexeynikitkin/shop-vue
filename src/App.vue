@@ -59,7 +59,7 @@ export default {
     },
     getUser() {
       let user = localStorage.getItem('user_logged');
-      if(user != '') {
+      if(localStorage.getItem('user_logged') != null) {
         user = JSON.parse(user);
         return user;
       }
