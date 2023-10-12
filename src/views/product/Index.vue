@@ -151,7 +151,7 @@ export default {
         Array.prototype.push.apply(cart, newProduct);
         localStorage.setItem('cart', JSON.stringify(cart));
       }
-      $('.cart-icon span').text(cart.length)
+      $('.cart-icon span').text(cart.length);
       window.location.reload()
     },
     addToWishlist(product) {
@@ -205,7 +205,7 @@ export default {
         }
       }
 
-    }
+    },
 
   }
 }

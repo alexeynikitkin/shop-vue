@@ -19,8 +19,10 @@ export default {
       }).then(res => {
         console.log(res);
         localStorage.setItem('user_logged', JSON.stringify(res.data));
+        localStorage.setItem('wishlist', '[]');
+        localStorage.setItem('cart', '[]');
         window.location.href = '/account'
-        $(document).trigger('changed')
+        // this.$router.push('/account')
       }).finally(v => {
         $(document).trigger('changed');
       })

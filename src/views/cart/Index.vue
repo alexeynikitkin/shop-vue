@@ -33,7 +33,10 @@ export default {
   },
   methods: {
     getProductsCart() {
-      this.products = JSON.parse(localStorage.getItem('cart'));
+      if(localStorage.getItem('cart') != null) {
+        this.products = JSON.parse(localStorage.getItem('cart'));
+      }
+
     },
     minusQty(product){
       if(product.qty > 1) {
@@ -54,6 +57,7 @@ export default {
         return product.id !== id;
       })
       this.updateCart();
+      window.location.reload()
     },
     updateCart(){
       localStorage.setItem('cart', JSON.stringify(this.products))
@@ -94,7 +98,10 @@ export default {
       })
     },
     getLoggedInUser(){
-      this.user = JSON.parse(localStorage.getItem('user_logged'));
+      if(localStorage.getItem('user_logged')!= null) {
+        this.user = JSON.parse(localStorage.getItem('user_logged'));
+      }
+
     },
     applyCoupon() {
       $('.cart-total-box .price, .cart-check-out-list .price-sub').text(this.totalPrice - this.discounts[0].value);
@@ -112,14 +119,17 @@ export default {
       })
     },
     getProductFromCart(id){
-      let cart = JSON.parse(localStorage.getItem('cart'));
-      // let thisProdId = this.$route.params.id;
-      var item = cart.filter(item => item.id == id);
-      if(Object.keys(item).length > 0) {
-        return item[0].qty;
-      } else {
-        return 0;
+      if(localStorage.getItem('cart')) {
+        let cart = JSON.parse(localStorage.getItem('cart'));
+        // let thisProdId = this.$route.params.id;
+        var item = cart.filter(item => item.id == id);
+        if(Object.keys(item).length > 0) {
+          return item[0].qty;
+        } else {
+          return 0;
+        }
       }
+
     }
   }
 }
@@ -207,7 +217,7 @@ export default {
           <div class="row">
             <div class="col-xl-12" v-if="products.length > 0">
               <div class="cart-button-box">
-                <div class="apply-coupon wow fadeInUp animated" v-if="discounts.length > 0">
+                <div class="apply-coupon wow fadeInUp animated" v-if="discounts != null">
                   <div class="apply-coupon-input-box mt-30 ">
                     <p>U have coupon for <span class="coupon-times" :data-value="discounts[0].times">{{discounts[0].times}}</span> times with discount ${{discounts[0].value}}</p>
                   </div>
