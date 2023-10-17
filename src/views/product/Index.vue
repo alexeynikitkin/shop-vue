@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     getProducts(page = 1) {
-      this.axios.post('http://127.0.0.1:8000/api/products', {
+      this.axios.post('https://karte.studiopresto.dev/api/products', {
         "categories" : this.categories,
         "tags" : this.tags,
         "prices" : this.prices,
@@ -49,7 +49,7 @@ export default {
     },
 
     getProduct(id) {
-      this.axios.get(`http://127.0.0.1:8000/api/products/${id}`)
+      this.axios.get(`https://karte.studiopresto.dev/api/products/${id}`)
           .then(res => {
             this.popupProduct = res.data.data
           })
@@ -58,7 +58,7 @@ export default {
           })
     },
     getFilterList() {
-      this.axios.get(`http://127.0.0.1:8000/api/products/filters`)
+      this.axios.get(`https://karte.studiopresto.dev/api/products/filters`)
           .then(res => {
             this.filterList = res.data
 
@@ -82,7 +82,7 @@ export default {
           })
     },
     getCats() {
-      this.axios.get(`http://127.0.0.1:8000/api/products/filters`)
+      this.axios.get(`https://karte.studiopresto.dev/api/products/filters`)
           .then(res => {
             this.attrs = res.data.categories
           })

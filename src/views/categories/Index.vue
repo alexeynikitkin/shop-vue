@@ -12,7 +12,7 @@ export default {
   },
   methods: {
     getCats() {
-      this.axios.get(`http://127.0.0.1:8000/api/products/filters`)
+      this.axios.get(`https://karte.studiopresto.dev/api/products/filters`)
           .then(res => {
             this.attrs = res.data.categories
           })

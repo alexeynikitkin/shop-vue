@@ -51,7 +51,7 @@ export default {
       $('.cart-icon span').text(this.products.length)
     },
     logoutUser() {
-      this.axios.post('http://127.0.0.1:8000/api/logout-user', {
+      this.axios.post('https://karte.studiopresto.dev/api/logout-user', {
       }).then(res => {
         console.log(res);
         localStorage.setItem('user_logged', '[]');
@@ -74,7 +74,7 @@ export default {
       }
     },
     getUserFromBack() {
-      this.axios.post('http://127.0.0.1:8000/api/get-user', {
+      this.axios.post('https://karte.studiopresto.dev/api/get-user', {
         'id': JSON.parse(localStorage.getItem('user_logged')).id,
       }).then(res => {
         console.log("User form back", res);

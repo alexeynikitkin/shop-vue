@@ -16,7 +16,7 @@ export default {
   },
   methods: {
     registerUser(){
-      this.axios.post('http://127.0.0.1:8000/api/register-user', {
+      this.axios.post('https://karte.studiopresto.dev/api/register-user', {
         'name': this.name,
         'email': this.email,
         'address': this.address,

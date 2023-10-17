@@ -8,7 +8,7 @@ export default {
   },
   methods: {
     getCategory(id) {
-      this.axios.get(`http://127.0.0.1:8000/api/categories/${this.$route.params.id}`)
+      this.axios.get(`https://karte.studiopresto.dev/api/categories/${this.$route.params.id}`)
           .then(res => {
             this.category = res.data.data
             console.log(this.category)
@@ -18,7 +18,7 @@ export default {
           })
     },
     getCats() {
-      this.axios.get(`http://127.0.0.1:8000/api/products/filters`)
+      this.axios.get(`https://karte.studiopresto.dev/api/products/filters`)
           .then(res => {
             this.attrs = res.data.categories
           })
@@ -108,7 +108,7 @@ export default {
       return ifInclude;
     },
     getProduct(id) {
-      this.axios.get(`http://127.0.0.1:8000/api/products/${id}`)
+      this.axios.get(`https://karte.studiopresto.dev/api/products/${id}`)
           .then(res => {
             this.popupProduct = res.data.data
           })

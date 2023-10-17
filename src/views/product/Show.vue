@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     getProduct(id) {
-      this.axios.get(`http://127.0.0.1:8000/api/products/${this.$route.params.id}`)
+      this.axios.get(`https://karte.studiopresto.dev/api/products/${this.$route.params.id}`)
           .then(res => {
             this.product = res.data.data
             console.log(this.product)
@@ -31,7 +31,7 @@ export default {
           })
     },
     storeComment(){
-      this.axios.post('http://127.0.0.1:8000/api/comments', {
+      this.axios.post('https://karte.studiopresto.dev/api/comments', {
         'users_name': this.users_name,
         'users_email': this.users_email,
         'users_number': this.users_number,

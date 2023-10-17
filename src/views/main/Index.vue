@@ -8,7 +8,7 @@ export default {
   },
   methods: {
     allComments() {
-      this.axios.post('http://127.0.0.1:8000/api/allcomments', {
+      this.axios.post('https://karte.studiopresto.dev/api/allcomments', {
         // "categories" : this.categories,
         // "tags" : this.tags,
         // "prices" : this.prices,
@@ -24,7 +24,7 @@ export default {
           })
     },
     getCats() {
-      this.axios.get(`http://127.0.0.1:8000/api/products/filters`)
+      this.axios.get(`https://karte.studiopresto.dev/api/products/filters`)
           .then(res => {
             this.attrs = res.data.categories
             console.log(this.attrs)

@@ -64,7 +64,7 @@ export default {
       $('.cart-icon span').text(this.products.length)
     },
     storeOrder(){
-      this.axios.post('http://127.0.0.1:8000/api/orders', {
+      this.axios.post('https://karte.studiopresto.dev/api/orders', {
         'products': this.products,
         'name': this.name,
         'email': this.email,
@@ -81,7 +81,7 @@ export default {
       })
     },
     storeOrderLoggedIn(){
-      this.axios.post('http://127.0.0.1:8000/api/orders', {
+      this.axios.post('https://karte.studiopresto.dev/api/orders', {
         'products': this.products,
         'name': this.user.name,
         'email': this.user.email,
@@ -107,7 +107,7 @@ export default {
       $('.cart-total-box .price, .cart-check-out-list .price-sub').text(this.totalPrice - this.discounts[0].value);
       $('.cart-check-out-list .price').text(this.totalPrice - this.discounts[0].value + 50);
       this.totalDisc = this.totalPrice - this.discounts[0].value;
-      this.axios.post('http://127.0.0.1:8000/api/discount', {
+      this.axios.post('https://karte.studiopresto.dev/api/discount', {
         'discount_id': this.discounts[0].id,
       }).then(res => {
         console.log(res);

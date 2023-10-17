@@ -12,7 +12,7 @@ export default {
   },
   methods: {
     login(){
-      this.axios.post('http://127.0.0.1:8000/api/login-user', {
+      this.axios.post('https://karte.studiopresto.dev/api/login-user', {
         'email': this.email,
         'password': this.password,
         'end': 'end'
