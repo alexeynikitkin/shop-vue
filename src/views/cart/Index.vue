@@ -4,8 +4,8 @@ export default {
   mounted() {
     $(document).trigger('changed')
     this.getProductsCart()
+    if(localStorage.getItem('user_logged') != null) {
     this.getLoggedInUser()
-    if(localStorage.getItem('user_logged')!= null) {
       this.discounts = this.user.discounts
     } else {
       this.discounts = []
