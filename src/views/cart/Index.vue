@@ -5,7 +5,12 @@ export default {
     $(document).trigger('changed')
     this.getProductsCart()
     this.getLoggedInUser()
-    this.discounts = this.user.discounts
+    if(localStorage.getItem('user_logged')!= null) {
+      this.discounts = this.user.discounts
+    } else {
+      this.discounts = []
+    }
+
     console.log(this.user)
     console.log('Discounts', this.discounts)
   },
@@ -218,7 +223,7 @@ export default {
             <div class="col-xl-12" v-if="products.length > 0">
               <div class="cart-button-box">
                 <div>
-                  <div class="apply-coupon wow fadeInUp animated" v-if="discounts">
+                  <div class="apply-coupon wow fadeInUp animated" v-if="discounts != null">
                     <div class="apply-coupon-input-box mt-30 ">
                       <p>U have coupon for <span class="coupon-times" :data-value="discounts[0].times">{{discounts[0].times}}</span> times with discount ${{discounts[0].value}}</p>
                     </div>
