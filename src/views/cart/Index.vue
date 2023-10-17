@@ -217,14 +217,17 @@ export default {
           <div class="row">
             <div class="col-xl-12" v-if="products.length > 0">
               <div class="cart-button-box">
-                <div class="apply-coupon wow fadeInUp animated" v-if="discounts.length > 0">
-                  <div class="apply-coupon-input-box mt-30 ">
-                    <p>U have coupon for <span class="coupon-times" :data-value="discounts[0].times">{{discounts[0].times}}</span> times with discount ${{discounts[0].value}}</p>
-                  </div>
-                  <div class="apply-coupon-button mt-30">
-                    <button @click.prevent="applyCoupon()" class="btn--primary style2 coupon-button" type="submit">Apply Coupon</button>
+                <div v-if="localStorage.getItem('user_logged')!= null">
+                  <div class="apply-coupon wow fadeInUp animated" v-if="discounts.length > 0">
+                    <div class="apply-coupon-input-box mt-30 ">
+                      <p>U have coupon for <span class="coupon-times" :data-value="discounts[0].times">{{discounts[0].times}}</span> times with discount ${{discounts[0].value}}</p>
+                    </div>
+                    <div class="apply-coupon-button mt-30">
+                      <button @click.prevent="applyCoupon()" class="btn--primary style2 coupon-button" type="submit">Apply Coupon</button>
+                    </div>
                   </div>
                 </div>
+
                 <div class="cart-button-box-right wow fadeInUp animated"> <router-link :to="{name: 'products.index'}" class="btn--primary mt-30"
                                                                                   type="submit">Continue Shopping</router-link> </div>
               </div>
