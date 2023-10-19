@@ -64,6 +64,19 @@ export default {
       $('.cart-icon span').text(cart.length)
       window.location.reload()
     },
+    getProductFromCart(id){
+      if(localStorage.getItem('cart') != null) {
+        let cart = JSON.parse(localStorage.getItem('cart'));
+        // let thisProdId = this.$route.params.id;
+
+        var item = cart.filter(item => item.id == id);
+        if(Object.keys(item).length > 0) {
+          return item[0].qty;
+        } else {
+          return 0;
+        }
+      }
+    },
   }
 }
 </script>
@@ -126,7 +139,7 @@ export default {
                         <p class="instock" v-else>Out Of Stock</p>
                       </td>
                       <td class="add-to-cart-btn">
-                        <a v-if="product.stock > 0" href="" @click.prevent="addToCart(product)" class=" btn--primary style2 ">Add To Cart</a>
+                        <a v-if="product.stock != getProductFromCart(product.id)" @click.prevent="addToCart(product, true)" class="btn--primary style2 ">Add To Cart</a>
                         <p v-else class="instock">Waiting for it...</p>
                       </td>
                       <td>

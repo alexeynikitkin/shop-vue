@@ -42,6 +42,7 @@ export default {
         console.log(res);
       }).finally(v => {
         $(document).trigger('changed');
+        window.location.reload();
       })
     },
     getProductFromCart(id = this.$route.params.id){
@@ -53,7 +54,44 @@ export default {
       } else {
         return 0;
       }
-    }
+    },
+    addToCart(product, isSingle) {
+      if(isSingle) {
+        $('.qtyValue').val(1);
+      }
+      let cart = localStorage.getItem('cart');
+      let qty = $('.qtyValue').val() ? $('.qtyValue').val() : 1;
+      $('.qtyValue').val(1);
+      let newProduct = [
+        {
+          'id' : product.id,
+          'image_url' : product.image_url,
+          'title' : product.title,
+          'price' : product.price,
+          'qty': qty,
+          'size': product.size,
+          'color' : product.color,
+          'stock' : product.stock
+        }
+      ];
+      if(!cart) {
+        localStorage.setItem('cart', JSON.stringify(newProduct));
+        $('.cart-icon span').text(newProduct.length)
+      } else {
+        cart = JSON.parse(cart);
+
+        cart.forEach(productInCart => {
+          if(productInCart.id === product.id) {
+            productInCart.qty = Number(productInCart.qty) + Number(qty);
+            newProduct = null;
+          }
+        })
+        Array.prototype.push.apply(cart, newProduct);
+        localStorage.setItem('cart', JSON.stringify(cart));
+      }
+      $('.cart-icon span').text(cart.length);
+      window.location.reload()
+    },
   }
 }
 </script>
@@ -174,11 +212,11 @@ export default {
                     <p v-else>Out of Stock!</p>
                     <p v-if="product && cart_qty > 0"> You have  {{ cart_qty }} qty by this product in cart!</p>
                   </div>
-                  <div v-if="product && product.stock > 0" class="shop-details-top-cart-box-btn"> <button class="btn--primary style2"
+                  <div v-if="product.stock != getProductFromCart(product.id)" @click.prevent="addToCart(product, true)" class="shop-details-top-cart-box-btn"> <button class="btn--primary style2"
                                                                       type="submit">Add to Cart</button> </div>
                   <ul class="shop-details-top-category-tags">
                     <li v-if="product">Category: <span>{{ product.category.title }}</span></li>
-<!--                    <li>Tags: <span>{{ product }}</span></li>-->
+                    <li>Tags: <span v-for="tag in product.tags">{{ tag.title }}</span></li>
                   </ul>
                   <ul class="shop-details-top-feature">
                     <li>
