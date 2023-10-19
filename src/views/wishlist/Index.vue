@@ -23,11 +23,13 @@ export default {
       })
       this.updateWishlist();
       $('.wish-icon span').text(this.products.length)
+      window.location.reload()
     },
     updateWishlist(){
       localStorage.setItem('wishlist', JSON.stringify(this.products))
     },
     addToCart(product, isSingle) {
+      localStorage.setItem('cart', []);
       if(isSingle) {
         $('.qtyValue').val(1);
       }

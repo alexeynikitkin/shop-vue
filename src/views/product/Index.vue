@@ -118,6 +118,7 @@ export default {
       }
     },
     addToCart(product, isSingle) {
+      localStorage.setItem('cart', []);
       if(isSingle) {
         $('.qtyValue').val(1);
       }
@@ -155,6 +156,7 @@ export default {
       window.location.reload()
     },
     addToWishlist(product) {
+      localStorage.setItem('wishlist', []);
       let wishlist = localStorage.getItem('wishlist');
       let newWishProduct = [
         {
