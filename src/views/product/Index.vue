@@ -54,7 +54,7 @@ export default {
             this.popupProduct = res.data.data
           })
           .finally(v => {
-            $(document).trigger('changed')
+            // $(document).trigger('changed')
           })
     },
     getFilterList() {
@@ -210,9 +210,40 @@ export default {
           return 0;
         }
       }
-
     },
-
+    increaseQty(){
+      if($('.qtySelector').attr('data-stock') == $('.qtySelector').attr('data-cart-qty')) {
+        $('.qtySelector').find('.qtyValue').val(0);
+      }
+      $(".qtySelector").each(function() {
+        $(this).find(".increaseQty").on("click", function () {
+          console.log('clicked++')
+          let stock = $(this).closest('.qtySelector').attr('data-stock');
+          let cartQty = $(this).closest('.qtySelector').attr('data-cart-qty');
+          var $parentElm = $(this).closest(".qtySelector");
+          var minVal = 1;
+          var maxVal = stock - cartQty;
+          var value = $parentElm.find(".qtyValue").val();
+          if (value < maxVal) {
+            value = parseInt(value) + 1;
+          }
+          $parentElm.find(".qtyValue").val(value);
+        });
+      });
+    },
+    decreaseQty() {
+      $(".qtySelector").each(function() {
+        $(this).find(".decreaseQty").on("click", function () {
+          console.log('clicked--')
+          var $parentElm = $(this).closest(".qtySelector");
+          var value = $parentElm.find(".qtyValue").val();
+          if (value > 1) {
+            value = parseInt(value) - 1;
+          }
+          $parentElm.find(".qtyValue").val(value);
+        });
+      });
+    },
   }
 }
 </script>
@@ -452,9 +483,9 @@ export default {
                                         <h6 v-if="popupProduct.stock > 0">Qty: {{ popupProduct.stock }}<br> In cart {{getProductFromCart(popupProduct.id)}}</h6>
                                         <div class="button-group" v-if="popupProduct.stock != getProductFromCart(popupProduct.id)">
                                           <div class="qtySelector text-center" :data-stock="popupProduct.stock" :data-cart-qty="getProductFromCart(popupProduct.id)">
-                                            <span class="decreaseQty"><i class="flaticon-minus"></i></span>
+                                            <span class="decreaseQty" @click.prevent="increaseQty()"><i class="flaticon-minus"></i></span>
                                             <input type="number" class="qtyValue" :value="value"/>
-                                            <span class="increaseQty"> <i class="flaticon-plus"></i></span>
+                                            <span class="increaseQty" @click.prevent="decreaseQty()"> <i class="flaticon-plus"></i></span>
                                           </div>
                                           <button v-if="popupProduct.stock != getProductFromCart(popupProduct.id)" class="btn--primary" @click.prevent="addToCart(popupProduct)"> Add to Cart </button>
                                         </div>
