@@ -29,7 +29,9 @@ export default {
       localStorage.setItem('wishlist', JSON.stringify(this.products))
     },
     addToCart(product, isSingle) {
-      localStorage.setItem('cart', []);
+      if(localStorage.getItem('cart') == null) {
+        localStorage.setItem('cart', []);
+      }
       if(isSingle) {
         $('.qtyValue').val(1);
       }
