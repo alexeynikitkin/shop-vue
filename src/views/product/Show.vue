@@ -25,6 +25,9 @@ export default {
           .then(res => {
             this.product = res.data.data
             console.log(this.product)
+            if(localStorage.getItem('cart') == null) {
+              localStorage.setItem('cart', '[]');
+            }
           })
           .finally(v => {
             $(document).trigger('changed')
@@ -45,14 +48,17 @@ export default {
         window.location.reload();
       })
     },
-    getProductFromCart(id = this.$route.params.id){
-      let cart = JSON.parse(localStorage.getItem('cart'));
-      // let thisProdId = this.$route.params.id;
-      var item = cart.filter(item => item.id == id);
-      if(Object.keys(item).length > 0) {
-        return item[0].qty;
-      } else {
-        return 0;
+    getProductFromCart(id){
+      if(localStorage.getItem('cart') != null) {
+        let cart = JSON.parse(localStorage.getItem('cart'));
+        // let thisProdId = this.$route.params.id;
+
+        var item = cart.filter(item => item.id == id);
+        if(Object.keys(item).length > 0) {
+          return item[0].qty;
+        } else {
+          return 0;
+        }
       }
     },
     addToCart(product, isSingle) {
@@ -91,6 +97,37 @@ export default {
       }
       $('.cart-icon span').text(cart.length);
       window.location.reload()
+    },
+    increaseQty(event){
+      let thisEl = event.target;
+      if(localStorage.getItem('cart') == null) {
+        localStorage.setItem('cart', '[]');
+      }
+      if($(thisEl).closest('.qtySelector').attr('data-stock') == $(thisEl).closest('.qtySelector').attr('data-cart-qty')) {
+        $(thisEl).closest('.qtySelector').find('.qtyValue').val(0);
+      }
+      let stock = $(thisEl).closest('.qtySelector').attr('data-stock');
+      let cartQty = $(thisEl).closest('.qtySelector').attr('data-cart-qty');
+      var $parentElm = $(thisEl).closest(".qtySelector");
+      var minVal = 1;
+      var maxVal = stock - cartQty;
+      var value = $parentElm.find(".qtyValue").val();
+      if (value < maxVal) {
+        value = parseInt(value) + 1;
+      }
+      $parentElm.find(".qtyValue").val(value);
+    },
+    decreaseQty(event){
+      let thisEl = event.target;
+      if(localStorage.getItem('cart') == null) {
+        localStorage.setItem('cart', '[]');
+      }
+      var $parentElm = $(thisEl).closest(".qtySelector");
+      var value = $parentElm.find(".qtyValue").val();
+      if (value > 1) {
+        value = parseInt(value) - 1;
+      }
+      $parentElm.find(".qtyValue").val(value);
     },
   }
 }
@@ -196,9 +233,9 @@ export default {
                     <h4>Quantity</h4>
                     <div class="product-quantity-box d-flex align-items-center flex-wrap">
                       <div class="qty mr-2">
-                        <div class="qtySelector text-center" :data-stock="product.stock" :data-cart-qty="cart_qty"> <span class="decreaseQty"><i
+                        <div class="qtySelector text-center" :data-stock="product.stock" :data-cart-qty="cart_qty"> <span class="decreaseQty" @click.prevent="decreaseQty($event)"><i
                             class="flaticon-minus"></i> </span> <input type="number"
-                                                                       class="qtyValue" value="1" /> <span class="increaseQty"> <i
+                                                                       class="qtyValue" value="1" /> <span class="increaseQty" @click.prevent="increaseQty($event)"> <i
                             class="flaticon-plus"></i> </span> </div>
                       </div>
                       <div class="product-quantity-check"> <i class="flaticon-select"></i>
@@ -208,15 +245,15 @@ export default {
                     </div>
                   </div>
                   <div class="shop-details-top-order-now"> <i class="flaticon-point"></i>
-                    <p v-if="product && product.stock > 0">Order Now, Only {{ product.stock }} Left !</p>
+                    <p v-if="product && product.stock > 0">Order Now, Only {{ product.stock - getProductFromCart(product.id) }} <br/> Left In Your Cart {{ getProductFromCart(product.id) }} !</p>
                     <p v-else>Out of Stock!</p>
                     <p v-if="product && cart_qty > 0"> You have  {{ cart_qty }} qty by this product in cart!</p>
                   </div>
-                  <div v-if="product.stock != getProductFromCart(product.id)" @click.prevent="addToCart(product, true)" class="shop-details-top-cart-box-btn"> <button class="btn--primary style2"
+                  <div v-if="product && product.stock != getProductFromCart(product.id)" @click.prevent="addToCart(product)" class="shop-details-top-cart-box-btn"> <button class="btn--primary style2"
                                                                       type="submit">Add to Cart</button> </div>
                   <ul class="shop-details-top-category-tags">
                     <li v-if="product">Category: <span>{{ product.category.title }}</span></li>
-                    <li>Tags: <span v-for="tag in product.tags">{{ tag.title }}</span></li>
+                    <li v-if="product">Tags: <span v-for="tag in product.tags">{{ tag.title }}</span></li>
                   </ul>
                   <ul class="shop-details-top-feature">
                     <li>

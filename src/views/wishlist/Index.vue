@@ -30,7 +30,7 @@ export default {
     },
     addToCart(product, isSingle) {
       if(localStorage.getItem('cart') == null) {
-        localStorage.setItem('cart', []);
+        localStorage.setItem('cart', '[]');
       }
       if(isSingle) {
         $('.qtyValue').val(1);

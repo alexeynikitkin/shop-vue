@@ -52,6 +52,9 @@ export default {
       this.axios.get(`https://karte.studiopresto.dev/api/products/${id}`)
           .then(res => {
             this.popupProduct = res.data.data
+            if(localStorage.getItem('cart') == null) {
+              localStorage.setItem('cart', '[]');
+            }
           })
           .finally(v => {
             // $(document).trigger('changed')
@@ -119,7 +122,7 @@ export default {
     },
     addToCart(product, isSingle) {
       if(localStorage.getItem('cart') == null) {
-        localStorage.setItem('cart', []);
+        localStorage.setItem('cart', '[]');
       }
       if(isSingle) {
         $('.qtyValue').val(1);
@@ -159,7 +162,7 @@ export default {
     },
     addToWishlist(product) {
       if(localStorage.getItem('wishlist') == null) {
-        localStorage.setItem('wishlist', []);
+        localStorage.setItem('wishlist', '[]');
       }
       let wishlist = localStorage.getItem('wishlist');
       let newWishProduct = [
@@ -211,38 +214,36 @@ export default {
         }
       }
     },
-    increaseQty(){
-      if($('.qtySelector').attr('data-stock') == $('.qtySelector').attr('data-cart-qty')) {
-        $('.qtySelector').find('.qtyValue').val(0);
+    increaseQty(event){
+      let thisEl = event.target;
+      if(localStorage.getItem('cart') == null) {
+        localStorage.setItem('cart', '[]');
       }
-      $(".qtySelector").each(function() {
-        $(this).find(".increaseQty").on("click", function () {
-          console.log('clicked++')
-          let stock = $(this).closest('.qtySelector').attr('data-stock');
-          let cartQty = $(this).closest('.qtySelector').attr('data-cart-qty');
-          var $parentElm = $(this).closest(".qtySelector");
-          var minVal = 1;
-          var maxVal = stock - cartQty;
-          var value = $parentElm.find(".qtyValue").val();
-          if (value < maxVal) {
-            value = parseInt(value) + 1;
-          }
-          $parentElm.find(".qtyValue").val(value);
-        });
-      });
+      if($(thisEl).closest('.qtySelector').attr('data-stock') == $(thisEl).closest('.qtySelector').attr('data-cart-qty')) {
+        $(thisEl).closest('.qtySelector').find('.qtyValue').val(0);
+      }
+      let stock = $(thisEl).closest('.qtySelector').attr('data-stock');
+      let cartQty = $(thisEl).closest('.qtySelector').attr('data-cart-qty');
+      var $parentElm = $(thisEl).closest(".qtySelector");
+      var minVal = 1;
+      var maxVal = stock - cartQty;
+      var value = $parentElm.find(".qtyValue").val();
+      if (value < maxVal) {
+        value = parseInt(value) + 1;
+      }
+      $parentElm.find(".qtyValue").val(value);
     },
-    decreaseQty() {
-      $(".qtySelector").each(function() {
-        $(this).find(".decreaseQty").on("click", function () {
-          console.log('clicked--')
-          var $parentElm = $(this).closest(".qtySelector");
-          var value = $parentElm.find(".qtyValue").val();
-          if (value > 1) {
-            value = parseInt(value) - 1;
-          }
-          $parentElm.find(".qtyValue").val(value);
-        });
-      });
+    decreaseQty(event){
+      let thisEl = event.target;
+      if(localStorage.getItem('cart') == null) {
+        localStorage.setItem('cart', '[]');
+      }
+      var $parentElm = $(thisEl).closest(".qtySelector");
+      var value = $parentElm.find(".qtyValue").val();
+      if (value > 1) {
+        value = parseInt(value) - 1;
+      }
+      $parentElm.find(".qtyValue").val(value);
     },
   }
 }
@@ -480,12 +481,12 @@ export default {
                                         </template>
                                       </div>
                                       <div class="add-product">
-                                        <h6 v-if="popupProduct.stock > 0">Qty: {{ popupProduct.stock }}<br> In cart {{getProductFromCart(popupProduct.id)}}</h6>
+                                        <h6 v-if="popupProduct.stock > 0">Qty: {{ popupProduct.stock - getProductFromCart(popupProduct.id) }}<br> In cart {{getProductFromCart(popupProduct.id)}}</h6>
                                         <div class="button-group" v-if="popupProduct.stock != getProductFromCart(popupProduct.id)">
                                           <div class="qtySelector text-center" :data-stock="popupProduct.stock" :data-cart-qty="getProductFromCart(popupProduct.id)">
-                                            <span class="decreaseQty" @click.prevent="increaseQty()"><i class="flaticon-minus"></i></span>
+                                            <span class="decreaseQty" @click.prevent="decreaseQty($event)"><i class="flaticon-minus"></i></span>
                                             <input type="number" class="qtyValue" :value="value"/>
-                                            <span class="increaseQty" @click.prevent="decreaseQty()"> <i class="flaticon-plus"></i></span>
+                                            <span class="increaseQty" @click.prevent="increaseQty($event)"> <i class="flaticon-plus"></i></span>
                                           </div>
                                           <button v-if="popupProduct.stock != getProductFromCart(popupProduct.id)" class="btn--primary" @click.prevent="addToCart(popupProduct)"> Add to Cart </button>
                                         </div>
@@ -558,19 +559,4 @@ export default {
 </template>
 
 <style scoped>
-  .color-option li a.active {
-    position: relative;
-    z-index: 1;
-  }
-  .color-option li a.active:before {
-    content: '\2611';
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
-    z-index: 2;
-  }
-  .popular-tag li a.active{
-  background: #f69c63;
-  }
 </style>
