@@ -54,9 +54,9 @@ export default {
       this.axios.post('https://karte.studiopresto.dev/api/logout-user', {
       }).then(res => {
         console.log(res);
-        localStorage.setItem('user_logged', '[]');
-        localStorage.setItem('wishlist', '[]');
-        localStorage.setItem('cart', '[]');
+        localStorage.removeItem('user_logged');
+        localStorage.removeItem('wishlist');
+        localStorage.removeItem('cart');
         // this.$router.push('/login')
         window.location.href = '/login'
       }).finally(v => {

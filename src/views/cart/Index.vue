@@ -5,7 +5,7 @@ export default {
     $(document).trigger('changed')
     this.getProductsCart()
     if(localStorage.getItem('user_logged') != null) {
-    this.getLoggedInUser()
+      this.getLoggedInUser()
       this.discounts = this.user.discounts
     } else {
       this.discounts = []
@@ -78,7 +78,7 @@ export default {
         'total_disc' : this.totalDisc
       }).then(res => {
         this.products = []
-        localStorage.setItem('cart', '[]');
+        localStorage.removeItem('cart');
         window.location.reload()
 
       }).finally(v => {
@@ -95,7 +95,7 @@ export default {
         'total_disc' : this.totalDisc
       }).then(res => {
         this.products = []
-        localStorage.setItem('cart', '[]');
+        localStorage.removeItem('cart');
         window.location.reload()
 
       }).finally(v => {

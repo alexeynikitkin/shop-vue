@@ -19,8 +19,8 @@ export default {
       }).then(res => {
         console.log(res);
         localStorage.setItem('user_logged', JSON.stringify(res.data));
-        localStorage.setItem('wishlist', '[]');
-        localStorage.setItem('cart', '[]');
+        localStorage.removeItem('wishlist');
+        localStorage.removeItem('cart');
         window.location.href = '/account'
         // this.$router.push('/account')
       }).finally(v => {
