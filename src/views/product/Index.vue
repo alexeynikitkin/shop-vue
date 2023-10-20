@@ -101,7 +101,14 @@ export default {
       this.getProducts()
     },
 
-    addColor(colors){
+    addColor(colors, event){
+      let thisEl = event.target;
+      console.log(thisEl)
+      if($(thisEl).hasClass('active')) {
+        $(thisEl).removeClass('active')
+      } else {
+        $(thisEl).addClass('active')
+      }
       if(!this.colors.includes(colors)) {
         this.colors.push(colors)
       } else {
@@ -111,7 +118,15 @@ export default {
       }
     },
 
-    addTag(id){
+    addTag(id, event){
+      let thisEl = event.target;
+      console.log(thisEl)
+
+      if($(thisEl).hasClass('active')) {
+        $(thisEl).removeClass('active')
+      } else {
+        $(thisEl).addClass('active')
+      }
       if(!this.tags.includes(id)) {
         this.tags.push(id)
       } else {
@@ -248,7 +263,23 @@ export default {
   }
 }
 </script>
-
+<style scoped>
+.color-option .li a.active {
+  position: relative;
+  z-index: 1;
+}
+.color-option1 .li a.active:before {
+  content: '\2611';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 2;
+}
+.popular-tag1 li a.active{
+  background: #f69c63;
+}
+</style>
 <template>
   <div>
     <main class="overflow-hidden ">
@@ -323,9 +354,9 @@ export default {
                   </div>
                   <div class="single-sidebar-box mt-30 wow fadeInUp animated">
                     <h4>Color Option </h4>
-                    <ul class="color-option">
-                      <li v-for="color in [...new Set(this.filterList.colors)]">
-                        <a @click.prevent="addColor(color)" :href="`#${color}`" class="color-option-single" :style="`background: ${color}`"> <span> {{color}}</span>
+                    <ul class="color-option color-option1">
+                      <li class="li" v-for="color in [...new Set(this.filterList.colors)]">
+                        <a @click="addColor(color, $event)" class="color-option-single" :style="`background: ${color}`"> <span> {{color}}</span>
                         </a>
                       </li>
                     </ul>
@@ -333,9 +364,9 @@ export default {
 
                   <div class="single-sidebar-box mt-30 wow fadeInUp animated pb-0 border-bottom-0 ">
                     <h4>Tags </h4>
-                    <ul class="popular-tag">
-                      <li v-for="tag in filterList.tags">
-                        <a @click.prevent="addTag(tag.id)" :href="`#${tag.id}`">{{ tag.title }}</a>
+                    <ul class="popular-tag popular-tag1">
+                      <li class="li" v-for="tag in filterList.tags">
+                        <a @click=" addTag(tag.id, $event)">{{ tag.title }}</a>
                       </li>
                     </ul>
                   </div>
@@ -558,5 +589,3 @@ export default {
   </div>
 </template>
 
-<style scoped>
-</style>

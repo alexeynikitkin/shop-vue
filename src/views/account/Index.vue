@@ -89,18 +89,24 @@ export default {
                   <div class="tabs-content__single">
                     <h4><span>Hello {{ user.name }}</span> (Not Admin? Logout)</h4>
                     <ul>
+
                       <li v-for="order in user.orders">
-                        <div class="item d-flex gap-2" v-for="item in JSON.parse(order.products)">
-                          <img width="100" height="100" :src="item.image_url" :alt="item.title">
-                          <div class="details">
-                            <h4>#: {{ order.id }}</h4>
-                            <p>Title: <router-link :to="{name: 'products.show', params: {id: item.id}}">{{ item.title }}</router-link></p>
-                            <p>Price: ${{ item.price }}</p>
-                            <p>Qty: {{ item.qty }}</p>
-                            <p>Size: {{ item.size }}</p>
-                            <p>Color: {{ item.color }}</p>
+                        <h4>#: {{ order.id }}</h4>
+                        <div class="item d-flex gap-4">
+                          <div v-for="item in JSON.parse(order.products)">
+                            <img width="100" height="100" :src="item.image_url" :alt="item.title">
+                            <div class="details">
+                              <p>Title: <router-link :to="{name: 'products.show', params: {id: item.id}}">{{ item.title }}</router-link></p>
+                              <p>Price: ${{ item.price }}</p>
+                              <p>Qty: {{ item.qty }}</p>
+                              <p>Size: {{ item.size }}</p>
+                              <p>Color: {{ item.color }}</p>
+                          </div>
                           </div>
                         </div>
+                        <br>
+                        <h5 v-if="order.total_disc"><b>Total price: ${{ order.total_disc }}</b></h5>
+                        <h5 v-else><b>Total price: ${{ order.total_price }}</b></h5>
                         <hr>
                       </li>
                     </ul>

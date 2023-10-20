@@ -868,16 +868,7 @@ jQuery(function ($) {
         next: $("button.next")
       }
     });
-    if ($(".color-option").length) {
-      $('.color-option li a').on('click', function() {
-        $(this).toggleClass('active');
-      })
-    }
-    if ($(".popular-tag").length) {
-      $('.popular-tag li a').on('click', function() {
-        $(this).toggleClass('active');
-      })
-    }
+
 
 
 
