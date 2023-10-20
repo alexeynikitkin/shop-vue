@@ -97,8 +97,8 @@ export default {
       }).then(res => {
         this.products = []
         localStorage.removeItem('cart');
-        console.log(res)
-        // window.location.replace(res)
+        let result = res.data.replace('int(1)', '')
+        window.location.replace(result)
 
       }).finally(v => {
         $(document).trigger('changed');
