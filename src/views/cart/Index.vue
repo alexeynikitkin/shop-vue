@@ -79,7 +79,7 @@ export default {
       }).then(res => {
         this.products = []
         localStorage.removeItem('cart');
-        let result = res.data.replace('int(1)', '')
+        let result = res.data
         window.location.replace(result)
 
       }).finally(v => {
@@ -97,7 +97,7 @@ export default {
       }).then(res => {
         this.products = []
         localStorage.removeItem('cart');
-        let result = res.data.replace('int(1)', '')
+        let result = res.data
         window.location.replace(result)
 
       }).finally(v => {
