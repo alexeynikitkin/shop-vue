@@ -133,8 +133,9 @@ export default {
               <ul class="page-dropdown-menu">
                 <li class="dropdown-list"><router-link to="/"> <span>Home </span></router-link>
                 </li>
-                <li class="dropdown-list"><router-link to="/products"> <span>Product </span></router-link>
-                </li>
+                <li class="dropdown-list"><router-link to="/products"> <span>Product </span></router-link></li>
+                <li class="dropdown-list"><router-link to="/categories"> <span>Product </span></router-link></li>
+
 
               </ul>
             </div>

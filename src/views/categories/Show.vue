@@ -263,13 +263,6 @@ export default {
                       <div class="col-lg-6">
                         <div class="popup-right-content">
                           <h3>{{ popupProduct.title }}</h3>
-                          <div class="ratting"><i
-                              class="flaticon-star"></i> <i
-                              class="flaticon-star"></i> <i
-                              class="flaticon-star"></i>
-                            <i class="flaticon-star"></i> <i
-                                class="flaticon-star"></i>
-                            <span>(112)</span></div>
                           <p class="text"> {{ popupProduct.description }}
                           </p>
                           <div class="price">
@@ -284,45 +277,24 @@ export default {
                               <a
                                   @click.prevent="getProduct(variation.id)"
                                   :style="`background: ${variation.color};`" :href="`#popup${variation.id}`" class="color-name">
-                                <span>{{ variation.color }}</span>
-                              </a>
-                            </template>
-                          </div>
-                          <div class="color-varient">
-                            <template v-for="variation in popupProduct.group">
-                              <a
-                                  @click.prevent="changePrice(popupProduct.price, variation.price)"
-                                  :style="`background: ${variation.size};`" :data-price="variation.size" class="color-name">
-                                <span>{{ variation.size }}</span>
+                                <span>color:{{ variation.color }}, size: {{ variation.size }}</span>
                               </a>
                             </template>
                           </div>
                           <div class="add-product">
-                            <h6>Qty:</h6>
-                            <div class="button-group">
-                              <div class="qtySelector text-center">
-                                                                                    <span class="decreaseQty"><i
-                                                                                        class="flaticon-minus"></i>
-                                                                                    </span> <input type="number"
-                                                                                                   class="qtyValue"
-                                                                                                   value="1"/>
-                                <span class="increaseQty"> <i
-                                    class="flaticon-plus"></i>
-                                                                                    </span></div>
-                              <button class="btn--primary" @click.prevent="addToCart(popupProduct)"> Add to Cart </button>
+                            <h6 v-if="popupProduct.stock > 0">Qty: {{ popupProduct.stock - getProductFromCart(popupProduct.id) }}<br> In cart {{getProductFromCart(popupProduct.id)}}</h6>
+                            <div class="button-group" v-if="popupProduct.stock != getProductFromCart(popupProduct.id)">
+                              <div class="qtySelector text-center" :data-stock="popupProduct.stock" :data-cart-qty="getProductFromCart(popupProduct.id)">
+                                <span class="decreaseQty" @click.prevent="decreaseQty($event)"><i class="flaticon-minus"></i></span>
+                                <input type="number" class="qtyValue" :value="value"/>
+                                <span class="increaseQty" @click.prevent="increaseQty($event)"> <i class="flaticon-plus"></i></span>
+                              </div>
+                              <button v-if="popupProduct.stock != getProductFromCart(popupProduct.id)" class="btn--primary" @click.prevent="addToCart(popupProduct)"> Add to Cart </button>
+                            </div>
+                            <div class="button-group" v-else>
+                              <p class="btn--primary"> Out of Stock </p>
                             </div>
                           </div>
-                          <div class="payment-method"><a href="#0"> <img
-                              src="/src/assets/images/payment_method/method_1.png"
-                              alt=""> </a>
-                            <a href="#0"> <img
-                                src="/src/assets/images/payment_method/method_2.png"
-                                alt=""> </a> <a href="#0"> <img
-                                src="/src/assets/images/payment_method/method_3.png"
-                                alt=""> </a>
-                            <a href="#0"> <img
-                                src="/src/assets/images/payment_method/method_4.png"
-                                alt=""> </a></div>
                         </div>
                       </div>
                     </div>

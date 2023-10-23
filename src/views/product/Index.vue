@@ -366,7 +366,7 @@ export default {
                     <h4>Tags </h4>
                     <ul class="popular-tag popular-tag1">
                       <li class="li" v-for="tag in filterList.tags">
-                        <a @click=" addTag(tag.id, $event)">{{ tag.title }}</a>
+                        <a @click="addTag(tag.id, $event)">{{ tag.title }}</a>
                       </li>
                     </ul>
                   </div>
