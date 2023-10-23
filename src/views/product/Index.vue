@@ -336,13 +336,6 @@ export default {
                 <button class="remove-sidebar d-lg-none d-block"><i
                     class="flaticon-cross"> </i></button>
                 <div class="sidebar-holder">
-<!--                  <form action="#0" class="footer-default__subscrib-form m-0 p-0 wow fadeInUp animated">-->
-<!--                    <div class="footer-input-box p-0 "><input type="email" placeholder="Email address"-->
-<!--                                                              name="email">-->
-<!--                      <button type="submit" class="subscribe_btn"><i-->
-<!--                          class="flaticon-magnifying-glass"></i></button>-->
-<!--                    </div>-->
-<!--                  </form>-->
                   <div class="single-sidebar-box mt-30 wow fadeInUp animated ">
                     <h4>Select Categories</h4>
                     <div class="checkbox-item">
@@ -356,7 +349,7 @@ export default {
                     <h4>Color Option </h4>
                     <ul class="color-option color-option1">
                       <li class="li" v-for="color in [...new Set(this.filterList.colors)]">
-                        <a @click="addColor(color, $event)" class="color-option-single" :style="`background: ${color}`"> <span> {{color}}</span>
+                        <a @click="addColor(color, $event)" class="color-option-single" :style="`background: ${color}; border: 1px solid #000;`"> <span> {{color}}</span>
                         </a>
                       </li>
                     </ul>
