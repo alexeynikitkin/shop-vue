@@ -116,6 +116,50 @@ export default {
             $(document).trigger('changed')
           })
     },
+    getProductFromCart(id){
+      if(localStorage.getItem('cart') != null) {
+        let cart = JSON.parse(localStorage.getItem('cart'));
+        // let thisProdId = this.$route.params.id;
+
+        var item = cart.filter(item => item.id == id);
+        if(Object.keys(item).length > 0) {
+          return item[0].qty;
+        } else {
+          return 0;
+        }
+      }
+    },
+    increaseQty(event){
+      let thisEl = event.target;
+      if(localStorage.getItem('cart') == null) {
+        localStorage.setItem('cart', '[]');
+      }
+      if($(thisEl).closest('.qtySelector').attr('data-stock') == $(thisEl).closest('.qtySelector').attr('data-cart-qty')) {
+        $(thisEl).closest('.qtySelector').find('.qtyValue').val(0);
+      }
+      let stock = $(thisEl).closest('.qtySelector').attr('data-stock');
+      let cartQty = $(thisEl).closest('.qtySelector').attr('data-cart-qty');
+      var $parentElm = $(thisEl).closest(".qtySelector");
+      var minVal = 1;
+      var maxVal = stock - cartQty;
+      var value = $parentElm.find(".qtyValue").val();
+      if (value < maxVal) {
+        value = parseInt(value) + 1;
+      }
+      $parentElm.find(".qtyValue").val(value);
+    },
+    decreaseQty(event){
+      let thisEl = event.target;
+      if(localStorage.getItem('cart') == null) {
+        localStorage.setItem('cart', '[]');
+      }
+      var $parentElm = $(thisEl).closest(".qtySelector");
+      var value = $parentElm.find(".qtyValue").val();
+      if (value > 1) {
+        value = parseInt(value) - 1;
+      }
+      $parentElm.find(".qtyValue").val(value);
+    },
   },
   data() {
     return {
@@ -128,6 +172,7 @@ export default {
       colors: [],
       tags: [],
       prices: [],
+      value: 1
       // pagination: [],
     }
   },
@@ -276,7 +321,7 @@ export default {
                             <template v-for="variation in popupProduct.group">
                               <a
                                   @click.prevent="getProduct(variation.id)"
-                                  :style="`background: ${variation.color};`" :href="`#popup${variation.id}`" class="color-name">
+                                  :style="`background: ${variation.color}; border: 1px solid #000;`" :href="`#popup${variation.id}`" class="color-name">
                                 <span>color:{{ variation.color }}, size: {{ variation.size }}</span>
                               </a>
                             </template>

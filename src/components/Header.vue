@@ -178,6 +178,10 @@ export default {
                             <router-link to="/products"> <span>Products</span>
                             </router-link>
                           </li>
+                          <li class="dropdown-list">
+                            <router-link to="/categories"> <span>Categories</span>
+                            </router-link>
+                          </li>
                         </ul>
                       </nav>
                       <div class="right d-flex align-items-center justify-content-end">
@@ -192,7 +196,7 @@ export default {
                           </li>
                           <li class="cartm"><a href="#0" class="number cart-icon"> <i
                               class="flaticon-shopping-cart"></i><span
-                              class="count">{{(productsCart == []) ? 0 : productsCart}}</span> </a></li>
+                              class="count">{{ (productsCart == []) ? 0 : productsCart }}</span> </a></li>
                         </ul>
                         <ul class="main-menu__widge-box d-flex align-items-center " v-else>
                           <li class="d-lg-block d-none">

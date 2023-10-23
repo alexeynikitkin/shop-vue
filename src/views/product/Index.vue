@@ -506,7 +506,7 @@ export default {
                                         <template v-for="variation in popupProduct.group">
                                           <a
                                               @click.prevent="getProduct(variation.id)"
-                                             :style="`background: ${variation.color};`" :href="`#popup${variation.id}`" class="color-name">
+                                             :style="`background: ${variation.color}; border: 1px solid #000;`" :href="`#popup${variation.id}`" class="color-name">
                                             <span>color:{{ variation.color }}, size: {{ variation.size }}</span>
                                           </a>
                                         </template>

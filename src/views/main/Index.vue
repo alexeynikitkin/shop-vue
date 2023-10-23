@@ -141,7 +141,7 @@ export default {
                   <div class="row  justify-content-center" v-if="attrs.length > 0">
                     <div class="col-lg-4 col-sm-6" v-for="cat in attrs">
                       <div class="categories-three__list-item mt-30 wow fadeInUp animated">
-                        <div class="categories-three__list-item-inner"><router-link :to="{name: 'categories.show', params: {id: cat.id}}" href="shop-grid-right-sidebar.html" class="img-box"> <img
+                        <div class="categories-three__list-item-inner"><router-link :to="{name: 'categories.show', params: {id: cat.id}}" class="img-box"> <img
                             src="/src/assets/images/home-three/categories-v2-img1.jpg" alt=""/>
                         </router-link>
                           <div class="title text-center">
@@ -166,7 +166,7 @@ export default {
             <div class="col-xxl-3 col-md-6 mt-30 wow fadeInUp animated " data-wow-delay="0.2s">
               <div class="core-features__box d-flex ms-0"><span class="one"></span> <span class="two"></span>
                 <div class="icon"><img src="/src/assets/images/icon/f-icon-1.png" alt=""></div>
-                <div class="core-features__box-content"><a href="login.html" class="d-block">
+                <div class="core-features__box-content"><a href="/login" class="d-block">
                   <h4> Secure Payment </h4>
                 </a>
                   <p>Everybody different which the why give offer styles for every body.</p>
@@ -176,7 +176,7 @@ export default {
             <div class="col-xxl-3 col-md-6 mt-30 wow fadeInUp animated " data-wow-delay="0.3s">
               <div class="core-features__box d-flex "><span class="one"></span> <span class="two"></span>
                 <div class="icon"><img src="/src/assets/images/icon/f-icon-2.png" alt=""></div>
-                <div class="core-features__box-content"><a href="login.html" class="d-block">
+                <div class="core-features__box-content"><a href="/login" class="d-block">
                   <h4> 27/7 Fast Delivery </h4>
                 </a>
                   <p>Everybody different which the why give offer styles for every body.</p>
@@ -186,7 +186,7 @@ export default {
             <div class="col-xxl-3 col-md-6 mt-30 wow fadeInUp animated " data-wow-delay="0.4s">
               <div class="core-features__box d-flex "><span class="one"></span> <span class="two"></span>
                 <div class="icon"><img src="/src/assets/images/icon/f-icon-3.png" alt=""></div>
-                <div class="core-features__box-content"><a href="login.html" class="d-block">
+                <div class="core-features__box-content"><a href="/login" class="d-block">
                   <h4> Return & Refund </h4>
                 </a>
                   <p>Everybody different which the why give offer styles for every body.</p>
@@ -196,7 +196,7 @@ export default {
             <div class="col-xxl-3 col-md-6 mt-30 wow fadeInUp animated " data-wow-delay="0.5s">
               <div class="core-features__box d-flex me-0"><span class="one"></span> <span class="two"></span>
                 <div class="icon"><img src="/src/assets/images/icon/f-icon-4.png" alt=""></div>
-                <div class="core-features__box-content"><a href="login.html" class="d-block">
+                <div class="core-features__box-content"><a href="/login" class="d-block">
                   <h4> Quality Support </h4>
                 </a>
                   <p>Everybody different which the why give offer styles for every body.</p>
